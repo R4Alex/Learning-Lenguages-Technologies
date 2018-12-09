@@ -1,6 +1,8 @@
 from io import open
 import pickle
-class Pelicula:
+
+
+class Movie:
 
     # Constructor
     def __init__(self, title, duration, releaseDate):
@@ -46,6 +48,6 @@ class Catalog:
 
 
 catalog = Catalog()
-catalog.add(Pelicula("El Padrino", 175, 1972))
-catalog.add(Pelicula("El Padrino: Parte 2", 202, 1974))
+catalog.add(Movie("El Padrino", 175, 1972))
+catalog.add(Movie("El Padrino: Parte 2", 202, 1974))
 catalog.display()
