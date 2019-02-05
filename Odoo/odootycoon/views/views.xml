@@ -40,21 +40,17 @@
     </record>
     -->
 
-    <!-- Top menu item -->
-    <!--
-    <menuitem name="/workspace/odootycoon" id="/workspace/odootycoon.menu_root"/>
-    -->
-    <!-- menu categories -->
-    <!--
-    <menuitem name="Menu 1" id="/workspace/odootycoon.menu_1" parent="/workspace/odootycoon.menu_root"/>
-    <menuitem name="Menu 2" id="/workspace/odootycoon.menu_2" parent="/workspace/odootycoon.menu_root"/>
-    -->
+    <!-- Top menu item (Main Menu of this menuitem)-->
+    <menuitem name="Odootycoon" id="odootycoon.menu_root"/>
+    
+    
+    <!-- Menu categories (item menu's sub-menus)-->
+    <menuitem name="Game" id="menu_1" parent="odootycoon.menu_root"/>
+    
+    
     <!-- actions -->
-    <!--
     <menuitem name="List" id="/workspace/odootycoon.menu_1_list" parent="/workspace/odootycoon.menu_1"
               action="/workspace/odootycoon.action_window"/>
-    <menuitem name="Server to list" id="/workspace/odootycoon" parent="/workspace/odootycoon.menu_2"
-              action="/workspace/odootycoon.action_server"/>
-    -->
+   
   </data>
 </odoo>

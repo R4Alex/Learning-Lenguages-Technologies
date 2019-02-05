@@ -2,14 +2,10 @@
 
 from odoo import models, fields, api
 
-# class /workspace/odootycoon(models.Model):
-#     _name = '/workspace/odootycoon./workspace/odootycoon'
+class OdooTycoonGameManager(models.Model):
+    _name = "odootycoon.gamemanager"
 
-#     name = fields.Char()
-#     value = fields.Integer()
-#     value2 = fields.Float(compute="_value_pc", store=True)
-#     description = fields.Text()
-#
-#     @api.depends('value')
-#     def _value_pc(self):
-#         self.value2 = float(self.value) / 100
+    name = fields.Char("Game Name")
+    day = fields.Integer("Current Day")
+    cash = fields.Float("Cash")
+    
