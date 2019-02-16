@@ -16,13 +16,11 @@
     -->
 
     <!-- actions opening views on models -->
-    <!--
-    <record model="ir.actions.act_window" id="/workspace/odootycoon.action_window">
-      <field name="name">/workspace/odootycoon window</field>
-      <field name="res_model">/workspace/odootycoon./workspace/odootycoon</field>
+    <record model="ir.actions.act_window" id="odootycoon.action_window">
+      <field name="name">Odoo Tycoon Game manager</field>
+      <field name="res_model">odootycoon.gamemanager</field>
       <field name="view_mode">tree,form</field>
     </record>
-    -->
 
     <!-- server action to the one above -->
     <!--
@@ -41,16 +39,16 @@
     -->
 
     <!-- Top menu item (Main Menu of this menuitem)-->
-    <menuitem name="Odootycoon" id="odootycoon.menu_root"/>
+    <menuitem name="Odoo Tycoon" id="odootycoon.menu_root"/>
     
     
     <!-- Menu categories (item menu's sub-menus)-->
-    <menuitem name="Game" id="menu_1" parent="odootycoon.menu_root"/>
+    <menuitem name="Game" id="odootycoon.menu_1" parent="odootycoon.menu_root"/>
     
     
     <!-- actions -->
-    <menuitem name="List" id="/workspace/odootycoon.menu_1_list" parent="/workspace/odootycoon.menu_1"
-              action="/workspace/odootycoon.action_window"/>
+    <menuitem name="Game Manager" id="odootycoon.menu_1_gamemanager" parent="odootycoon.menu_1"
+              action="odootycoon.action_window"/>
    
   </data>
 </odoo>
