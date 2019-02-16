@@ -1,19 +1,36 @@
 <odoo>
   <data>
     <!-- explicit list view definition -->
-    <!--
-    <record model="ir.ui.view" id="/workspace/odootycoon.list">
-      <field name="name">/workspace/odootycoon list</field>
-      <field name="model">/workspace/odootycoon./workspace/odootycoon</field>
+    <record model="ir.ui.view" id="odootycoon_gamemanager_list">
+      <field name="name">odootycoon.gamemanager.tree</field>
+      <field name="model">odootycoon.gamemanager</field>
       <field name="arch" type="xml">
         <tree>
           <field name="name"/>
-          <field name="value"/>
-          <field name="value2"/>
+          <field name="cash"/>
+          <field name="day"/>
         </tree>
       </field>
     </record>
-    -->
+    
+    
+    <!-- explicit form view definition -->
+    <record model="ir.ui.view" id="odootycoon_gamemanager_form">
+      <field name="name">odootycoon.gamemanager.form</field>
+      <field name="model">odootycoon.gamemanager</field>
+      <field name="arch" type="xml">
+        <form>
+          <sheet>
+            <group>
+              <field name="name"/>
+              <field name="cash"/>
+              <field name="day"/>
+            </group>
+          </sheet>
+        </form>
+      </field>
+    </record>
+
 
     <!-- actions opening views on models -->
     <record model="ir.actions.act_window" id="odootycoon.action_window">
