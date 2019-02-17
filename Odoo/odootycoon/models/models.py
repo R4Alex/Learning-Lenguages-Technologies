@@ -33,3 +33,6 @@ class OdooTycoonGameManager(models.Model):
     def skip30days(self):
         for i in range(30):
             self.nextday()
+
+    def reset(self):
+        self.write({'day': 1, 'cash': 5000})
