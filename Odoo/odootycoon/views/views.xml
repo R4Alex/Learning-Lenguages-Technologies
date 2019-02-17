@@ -20,6 +20,10 @@
       <field name="model">odootycoon.gamemanager</field>
       <field name="arch" type="xml">
         <form>
+          <header>
+            <button name="nextday" string="Next Day" type="object"/>
+          </header>
+          
           <sheet>
             <group>
               <field name="name"/>
@@ -27,6 +31,7 @@
               <field name="day"/>
             </group>
           </sheet>
+        
         </form>
       </field>
     </record>
