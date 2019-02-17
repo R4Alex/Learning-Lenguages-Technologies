@@ -25,5 +25,11 @@ class OdooTycoonGameManager(models.Model):
         does one update query, so is more efficient'''
         
         self.write({'day': self.day + 1, 'cash': self.cash - 100})
-        
-        
+
+    def skip5days(self):
+        for i in range(5):
+            self.nextday()
+            
+    def skip30days(self):
+        for i in range(30):
+            self.nextday()
