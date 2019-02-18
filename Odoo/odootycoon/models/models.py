@@ -2,6 +2,15 @@
 
 from odoo import models, fields, api
 
+class OdooTycoonProductTemplate(models.Model):
+    _name = "product.template"
+    _inherit = "product.template"
+    _description = '''  '''
+    
+    unlockcost = fields.Float('Unlock Cost', default=750)
+    unlock = fields.Boolean('Unlocked', default=False)
+
+
 class OdooTycoonGameManager(models.Model):
     _name = "odootycoon.gamemanager"
     _description = '''  '''
