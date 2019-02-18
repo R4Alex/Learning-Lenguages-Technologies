@@ -8,7 +8,7 @@ class OdooTycoonProductTemplate(models.Model):
     _description = '''  '''
     
     unlockcost = fields.Float('Unlock Cost', default=750)
-    unlock = fields.Boolean('Unlocked', default=False)
+    unlocked = fields.Boolean('Unlocked', default=False)
 
 
 class OdooTycoonGameManager(models.Model):

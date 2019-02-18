@@ -38,42 +38,52 @@
         </form>
       </field>
     </record>
+    
+    <!-- explicit form view definition -->
+    <record model="ir.ui.view" id="odootycoon_product_form">
+      <field name="name">odootycoon.product.form</field>
+      <field name="model">product.template</field>
+      <field name="inherit_id" ref="product.product_template_only_form_view"/>
+      <field name="arch" type="xml">
+        <notebook position="inside">
+          <page string="Odoo Tycoon">
+            <group>
+              <field name="unlockcost"/>
+              <field name="unlocked"/>
+            </group>
+          </page>
+        </notebook>
+        
+      </field>
+    </record>
 
 
     <!-- actions opening views on models -->
-    <record model="ir.actions.act_window" id="odootycoon.action_window">
+    <record model="ir.actions.act_window" id="odootycoon.action_window_manager">
       <field name="name">Odoo Tycoon Game manager</field>
       <field name="res_model">odootycoon.gamemanager</field>
       <field name="view_mode">tree,form</field>
     </record>
-
-    <!-- server action to the one above -->
-    <!--
-    <record model="ir.actions.server" id="/workspace/odootycoon.action_server">
-      <field name="name">/workspace/odootycoon server</field>
-      <field name="model_id" ref="model_/workspace/odootycoon_/workspace/odootycoon"/>
-      <field name="state">code</field>
-      <field name="code">
-        action = {
-          "type": "ir.actions.act_window",
-          "view_mode": "tree,form",
-          "res_model": self._name,
-        }
-      </field>
+    
+    <!-- actions opening views on models -->
+    <record model="ir.actions.act_window" id="odootycoon.action_window_products">
+      <field name="name">Odoo Tycoon Products</field>
+      <field name="res_model">product.template</field>
+      <field name="view_mode">kanban,tree,form</field>
     </record>
-    -->
 
-    <!-- Top menu item (Main Menu of this menuitem)-->
+    <!-- Top menu item (Main Menu)-->
     <menuitem name="Odoo Tycoon" id="odootycoon.menu_root"/>
-    
-    
     <!-- Menu categories (item menu's sub-menus)-->
-    <menuitem name="Game" id="odootycoon.menu_1" parent="odootycoon.menu_root"/>
+    <menuitem name="Tycoon" id="odootycoon.menu_1" parent="odootycoon.menu_root"/>
     
     
     <!-- actions -->
     <menuitem name="Game Manager" id="odootycoon.menu_1_gamemanager" parent="odootycoon.menu_1"
-              action="odootycoon.action_window"/>
-   
+              action="odootycoon.action_window_manager"/>
+    
+    <menuitem name="Tycoon Products" id="odootycoon.menu_1_products" parent="odootycoon.menu_1"
+              action="odootycoon.action_window_products"/>
+
   </data>
 </odoo>
