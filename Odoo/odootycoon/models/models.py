@@ -32,8 +32,17 @@ class OdooTycoonGameManager(models.Model):
         
         Otherwise we can use the method write. With this method odoo just
         does one update query, so is more efficient'''
+        #self.write({'day': self.day + 1, 'cash': self.cash - 100})
+
+        # Process Unlocked Products
+        products = self.env['product.template'].search([('unlocked', '=', True)])
+        cash = 0
         
-        self.write({'day': self.day + 1, 'cash': self.cash - 100})
+        for product in products:
+            cash += product.list_price *10
+        
+        self.write({'day': self.day + 1, 'cash': self.cash + cash})
+        
 
     def skip5days(self):
         for i in range(5):
@@ -45,3 +54,5 @@ class OdooTycoonGameManager(models.Model):
 
     def reset(self):
         self.write({'day': 1, 'cash': 5000})
+        self.env['product.template'].search([('unlocked','=',True)]).write({'unlocked':False})
+
