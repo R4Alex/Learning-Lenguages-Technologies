@@ -50,6 +50,7 @@
             <group>
               <field name="unlockcost"/>
               <field name="unlocked"/>
+              <button name="unlockproduct" string="Unlock Product" type="object"/>
             </group>
           </page>
         </notebook>
