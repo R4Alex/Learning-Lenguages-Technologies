@@ -2,6 +2,8 @@
 
 from odoo import models, fields, api
 from odoo.exceptions import Warning
+from random import randint
+
 
 class OdooTycoonProductTemplate(models.Model):
     _name = "product.template"
@@ -48,7 +50,8 @@ class OdooTycoonGameManager(models.Model):
         cash = 0
         
         for product in products:
-            cash += product.list_price *10
+            numsold = randint(5, 25)
+            cash += product.list_price * numsold
         
         self.write({'day': self.day + 1, 'cash': self.cash + cash})
         
