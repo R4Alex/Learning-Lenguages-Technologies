@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 from odoo import models, fields, api
+from odoo.exceptions import Warning
 
 class OdooTycoonProductTemplate(models.Model):
     _name = "product.template"
@@ -9,7 +10,15 @@ class OdooTycoonProductTemplate(models.Model):
     
     unlockcost = fields.Float('Unlock Cost', default=750)
     unlocked = fields.Boolean('Unlocked', default=False)
-
+    
+    
+    def unlockproduct(self):
+        gamemanager = self.env['odootycoon.gamemanager'].search([('id','=',1)])
+        if gamemanager.cash >= self.unlockcost:
+            self.unlocked = True
+            gamemanager.cash -= self.unlockcost
+        else:
+            raise Warning('You do not have engough money to by the {}'.format(self.name))
 
 class OdooTycoonGameManager(models.Model):
     _name = "odootycoon.gamemanager"
