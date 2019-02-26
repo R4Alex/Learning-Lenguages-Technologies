@@ -48,7 +48,7 @@ class OdooTycoonGameManager(models.Model):
         # Process Unlocked Products
         products = self.env['product.template'].search([('unlocked', '=', True)])
         cash = 0
-        
+
         for product in products:
             numsold = randint(5, 25)
             cash += product.list_price * numsold
