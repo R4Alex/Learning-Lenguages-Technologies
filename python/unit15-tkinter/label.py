@@ -3,31 +3,24 @@ from tkinter import *
 # root Configuration
 root = Tk()
 
-frame = Frame(root, width=480, height=320)
-frame.pack()
 
-label = Label(frame, text="Hello world!")
-#label.pack()
-label.place(x=0, y=0)
 
-"""
-# Dynamic text Variables
 text = StringVar()
-text.set("New Text")
+text.set("A new text")
 
-Label(root, text="Hello world").pack(anchor="nw")
+#frame = Frame(root, width=480, height=320)
+#frame.pack()
 
-lab = Label(root, text="Label")
-lab.pack(anchor="center")
-lab.config(bg="green", fg="blue", font=("Verdana", 24))
+#label = Label(root, text="Hello world!")
+#label.pack()
+#label.place(x=0, y=0)
 
-Label(root, text="Another Label").pack(anchor="se")
+Label(root, text="Hello world!").pack(anchor="nw")
+label = Label(root, text="label!")
+label.pack(anchor="center")
+Label(root, text="last label!").pack(anchor="se")
 
-
-
-image = PhotoImage(file="giphy.gif")
-Label(root, image=image, bd=0).pack(side="left")
-"""
-
+label.config(bg="green", fg="blue", font=("verdana",24))
+label.config(textvariable=text)
 
 root.mainloop()
