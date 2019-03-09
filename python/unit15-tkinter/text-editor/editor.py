@@ -33,12 +33,30 @@ def file_open():
 
 
 def save():
-	info.set("Save")
-
+	if route != "":
+		content = text.get(1.0, 'end-1c')
+		file = open(route, 'w+')
+		file.write(content)
+		file.close()
+		info.set("File saved")
+	else:
+		save_as()
 
 def save_as():
-	info.set("Save as")
+	global route
 
+	file = FileDialog.asksaveasfile(title="Save File as", mode="w", defaultextension=".txt")
+
+	if file is not None:
+		route = file.name
+		content = text.get(1.0, 'end-1c')
+		file = open(route, 'w+')
+		file.write(content)
+		file.close()
+		info.set("File saved")
+	else:
+		info.set("Save Canceled")
+		route = ""
 
 root = Tk()
 root.title("Mi editor")
