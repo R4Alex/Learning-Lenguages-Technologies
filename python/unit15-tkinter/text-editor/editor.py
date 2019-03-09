@@ -1,12 +1,35 @@
 from tkinter import *
+from io import open
+from tkinter import filedialog as FileDialog
 
+route = "" 
 
 def new():
 	info.set("New File")
+	global route
+	route = ""
+	text.delete(1.0, "end")
+	root.title("My Editor")
 
 
-def open():
+def file_open():
+	global route
 	info.set("Open a File")
+	route = FileDialog.askopenfilename(
+		initialdir=".", 
+		filetype=(
+			("Text File", "*.txt"),
+			("All Files", "*.*")
+		),
+		title="Open a Text File")
+	
+	if route != "":
+		file = open(route, 'r')
+		content = file.read()
+		text.delete(1.0, "end")
+		text.insert('insert', content)
+		file.close
+		root.title(route + " - My Editor")
 
 
 def save():
@@ -24,7 +47,7 @@ menubar = Menu(root)
 
 filemenu = Menu(menubar, tearoff=0)
 filemenu.add_command(label="New", command=new)
-filemenu.add_command(label="Open", command=open)
+filemenu.add_command(label="Open", command=file_open)
 filemenu.add_command(label="Save", command=save)
 filemenu.add_command(label="Save as...", command=save_as)
 filemenu.add_separator()
