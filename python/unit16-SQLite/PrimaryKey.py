@@ -41,4 +41,3 @@ cursor.executemany("INSERT INTO products VALUES (null, ?, ?, ?)", products)
 
 connection.commit()
 connection.close()
-
