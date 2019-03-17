@@ -56,24 +56,3 @@ if len(sys.argv) == 3:
 else:
     print("Error - Introduce los argumentos correctamente")
     print('Ejemplo: escribir_lineas.py "Texto" 5')
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
