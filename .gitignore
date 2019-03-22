@@ -2,5 +2,5 @@ python/unit07-basicIO/.idea/
 python/unit07-basicIO/venv/
 odoo/odootycoon/controllers/__pycache__/
 odoo/odootycoon/models/__pycache__/
-openacademy/models/__pycache__
-openacademy/controllers/__pycache__
+odoo/openacademy/models/__pycache__
+odoo/openacademy/controllers/__pycache__

@@ -1,14 +1,63 @@
 <odoo>
+    <record model="ir.ui.view" id="openacademy_course_form_view">
+        <field name="name">course.form</field>
+        <field name="model">openacademy.course</field>
+        <field name="arch" type="xml">
+            <form string="Courses Form">
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="description"/>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Description">
+                        <field name="description"/>
+                    </page>
+                    
+                    <page string="About">
+                        This is an example of notebook
+                    </page>
+                    
+                </notebook>
+            </form>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="openacademy_course_list_view">
+        <field name="name">course.list</field>
+        <field name="model">openacademy.course</field>
+        
+        <field name="arch" type="xml">
+            <tree string="Courses List">
+                <field name="name" string="Name Tree"/>
+                <field name="description"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="openacademy_course_search_view">
+        <field name="name">course.search</field>
+        <field name="model">openacademy.course</field>
+
+        <field name="arch" type="xml">
+            <search string="Courses Search">
+                <field name="name" string="Name search"/>
+                <field name="description"/>
+            </search>
+        </field>
+
+    </record>
+    
   
     <record model="ir.actions.act_window" id="course_list_action">
-      <field name="name">Courses</field>
-      <field name="res_model">openacademy.course</field>
-      <field name="view_mode">tree,form</field>
-      <field name="help" type="html">
-        <p class="oe_view_nocontent_create">Create your firts course</p>
-      </field>
+        <field name="name">Courses</field>
+        <field name="res_model">openacademy.course</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create your firts course</p>
+        </field>
     </record>
-
 
     <!-- Main Menu item -->
     <menuitem name="Open Academy" id="main_openacademy_menu"/>
@@ -17,5 +66,4 @@
     <!-- Menu Level 2 -->  
     <menuitem name="Courses" id="openacademy_menu_2" parent="openacademy_menu_1" action="course_list_action"/>
 
-    -->
 </odoo>
