@@ -17,6 +17,8 @@
     'category': 'Uncategorized',
     'version': '12.0.0.1',
 
+    'application': 'True',
+    
     # any module necessary for this one to work correctly
     'depends': [
         'base'
