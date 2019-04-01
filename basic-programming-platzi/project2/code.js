@@ -7,16 +7,15 @@ document.write("You are on: " + route)
 var element = document.getElementById("paint");
 var context = element.getContext("2d")
 
-context.beginPath();
-context.strokeStyle = "red";
-context.moveTo(100, 100);
-context.lineTo(200, 200);
-context.stroke();
-context.closePath()
 
-context.beginPath();
-context.strokeStyle = "blue";
-context.moveTo(180, 10);
-context.lineTo(290, 200);
-context.stroke();
-context.closePath()
+function drawLine(color, x_start, y_start, x_final, y_final) {
+    context.beginPath();
+    context.strokeStyle = color;
+    context.moveTo(x_start, y_start);
+    context.lineTo(x_final, y_final);
+    context.stroke();
+    context.closePath()    
+}
+
+drawLine("blue", 10, 300, 220, 10)
+drawLine("yellow", 310, 10, 10, 220)
