@@ -6,17 +6,17 @@ def create_database():
 	connection = sqlite3.connect("restaurant.db")
 	cursor = connection.cursor()
 	try:
-		cursor.execute('''
+		cursor.execute("""
 			CREATE TABLE category(
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
-					name VARCHAR(100) UNIQUE NOT NULL)''')
+					name VARCHAR(100) UNIQUE NOT NULL)""")
 
-		cursor.execute('''
+		cursor.execute("""
 			CREATE TABLE plate(
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				name VARCHAR(100) UNIQUE NOT NULL, 
 				category_id INTEGER NOT NULL,
-				FOREIGN KEY(category_id) REFERENCES category(id))''')
+				FOREIGN KEY(category_id) REFERENCES category(id))""")
 
 		print("Tables Created")
 		connection.commit()
