@@ -1,8 +1,13 @@
-var element = document.getElementById("paint");
-var context = element.getContext("2d")
-var lines = 60;
-var l = 0;
-var mycolor = "blue";
+
+var mypaint = document.getElementById("paint");
+var context = mypaint.getContext("2d");
+var text = document.getElementById("text_lines");
+
+var mybutton = document.getElementById("button1");
+mybutton.addEventListener("click", drawByClick);
+
+var canvas_width = mypaint.width;
+var canvas_height = mypaint.height;
 
 function drawLine(color, x_start, y_start, x_final, y_final) {
     context.beginPath();
@@ -14,33 +19,39 @@ function drawLine(color, x_start, y_start, x_final, y_final) {
     context.closePath();
 }
 
-for (l = 0; l < lines; l++) {
-    y_start = 10 * l;
-    x_final = 10 * (l + 1);
-    drawLine(mycolor, 0, y_start, x_final, 600);
-}
+function drawByClick() {
+    var lines = parseInt(text.value);
+    var l;
+    var mycolor = "blue";
+    var space = canvas_width / lines;
 
-for (l = 0; l < lines; l++) {
-    y_start = 10 * l;
-    x_final = 10 * (l + 1);
-    drawLine(mycolor, 600, y_start, x_final, 0);
+    for (l = 0; l < lines; l++) {
+        y_start = space * l;
+        x_final = space * (l + 1);
+        drawLine(mycolor, 0, y_start, x_final, canvas_height);
+    }
+    
+    for (l = 0; l < lines; l++) {
+        y_start = space * l;
+        x_final = space * (l + 1);
+        drawLine(mycolor, canvas_height, y_start, x_final, 0);
+    }
+    
+    for (l = 0; l < lines; l++) {
+        y_start = space * l;
+        x_final = canvas_height - (space * (l + 1));
+        drawLine(mycolor, canvas_height, y_start, x_final, canvas_height);
+    }
+    
+    for (l = 0; l < lines; l++) {
+        y_start = canvas_height - (space * l);
+        x_final = space * (l + 1);
+        drawLine(mycolor, 0, y_start, x_final, 0);
+    }
 }
-
-for (l = 0; l < lines; l++) {
-    y_start = 10 * l;
-    x_final = 600 - (10 * (l + 1));
-    drawLine(mycolor, 600, y_start, x_final, 600);
-}
-
-for (l = 0; l < lines; l++) {
-    y_start = 600- (10 * l);
-    x_final = 10 * (l + 1);
-    drawLine(mycolor, 0, y_start, x_final, 0);
-}
-
 
 // Border
-drawLine("black", 1, 1, 1, 600);
-drawLine("black", 1, 600, 600, 600);
-drawLine("black", 1, 1, 600, 1);
-drawLine("black", 600, 1, 600, 600);
+drawLine("black", 0, 0, 0, canvas_height);
+drawLine("black", 0, canvas_height, canvas_height, canvas_height);
+drawLine("black", 0, 0, canvas_height, 0);
+drawLine("black", canvas_height, 0, canvas_height, canvas_height);
