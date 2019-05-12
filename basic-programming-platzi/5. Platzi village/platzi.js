@@ -1,22 +1,32 @@
 
-function random(max, min){
-  return Math.floor(Math.random() * (max - min + 1) ) + min;
+function random(max, min) {
+	return Math.floor(Math.random() * (max - min + 1) ) + min;
 }
 
 function paint(){
-  if (background.isLoaded){
-	  context.drawImage(background.image, 0, 0);
+	
+	if(background.isLoaded){
+		context.drawImage(background.image, 0, 0);
+	}
+	
+	if(cow.isLoaded){
+		var quantity = random(5, 10);
+	  	for(var i=0; i < quantity; i++){
+			var x = random(0, 420);
+			var y = random(0, 420);
+			context.drawImage(cow.image, x, y);
+	}
   }
 
-  if (cow.isLoaded){
-	context.drawImage(cow.image, 0, 0);
-  }
-
-  if (rooster.isLoaded){
+  if(rooster.isLoaded){
+	var x = random(0, 420);
+	var y = random(0, 420);
 	context.drawImage(rooster.image, 150, 150);
   }
 
-  if (pig.isLoaded){
+  if(pig.isLoaded){
+	var x = random(0, 420);
+	var y = random(0, 420);
 	context.drawImage(pig.image, 250, 150);
   }
 }
