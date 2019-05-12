@@ -14,7 +14,7 @@ var x = 150;
 var y = 150;
 var movement = 10;
 
-drawLine("browm", x-1, y-1, x+1, y+1, context);
+drawLine("brown", x-1, y-1, x+1, y+1, context);
 
 function drawLine(color, x_start, y_start, x_final, y_final, context) {
   context.beginPath();
