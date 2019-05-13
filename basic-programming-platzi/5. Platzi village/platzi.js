@@ -8,28 +8,29 @@ function paint(){
 		context.drawImage(background.image, 0, 0);
 	}
 	if(cow.isLoaded){
-		var quantity = random(5, 10);
-		for(var i=0; i < quantity; i++){
-			var x = random(0, 420);
-			var y = random(0, 420);
+		for(var i=0; i < cow.positionsX.length; i++){
+			var x = cow.positionsX[i];
+			var y = cow.positionsY[i];
 			context.drawImage(cow.image, x, y);
 		}
 	}
 	if(rooster.isLoaded){
-		var quantity = random(5, 10);
-		for(var i=0; i < quantity; i++){
-			var x = random(0, 420);
-			var y = random(0, 420);
+		for(var i=0; i < rooster.positionsX.length; i++){
+			var x = rooster.positionsX[i];
+			var y = rooster.positionsY[i];
 			context.drawImage(rooster.image, x, y);
 		}
 	}
 	if(pig.isLoaded){
-		var quantity = random(5, 10);
-		for(var i=0; i < quantity; i++){
-			var x = random(0, 420);
-			var y = random(0, 420);
+		for(var i=0; i < pig.positionsX.length; i++){
+			var x = pig.positionsX[i];
+			var y = pig.positionsY[i];
 			context.drawImage(pig.image, x, y);
 		}
+	}
+
+	if(wolf.isLoaded){
+		context.drawImage(wolf.image, wolf.positionX, wolf.positionY);
 	}
 }
 
@@ -53,8 +54,22 @@ function loadPigs(){
 	paint();
 }
 
+function loadWolf(){
+	wolf.isLoaded = true
+	paint();
+}
+
+var keys = {
+	LEFT: 37,
+	UP: 38,
+	RIGHT: 39,
+	DOWN: 40,
+};
+
+document.addEventListener("keyup", keyboardDraw);
 var vp = document.getElementById("platzivillage");
 var context = vp.getContext("2d");
+
 
 
 var background = {
@@ -64,17 +79,55 @@ var background = {
 
 var cow = {
 	url: "cow.png",
-	isLoaded: false
+	isLoaded: false,
+	quantity: random(3, 7),
+	positionsX: [],
+	positionsY: [],
 }
 
 var rooster = {
 	url: "rooster.png",
-	isLoaded: false
+	isLoaded: false,
+	quantity: random(3, 7),
+	positionsX: [],
+	positionsY: [],
 }
 
 var pig = {
 	url: "pig.png",
-	isLoaded: false
+	isLoaded: false,
+	quantity: random(3, 7),
+	positionsX: [],
+	positionsY: [],
+}
+
+var wolf = {
+	url: "wolf.png",
+	isLoaded: false,
+	positionX: 0,
+	positionY: 0,
+	movement: 50
+}
+
+for (var i=0; i < cow.quantity; i++){
+	var x = random(0, 420);
+	cow.positionsX.push(x);
+	var y = random(0, 420);
+	cow.positionsY.push(y);
+}
+
+for (var i=0; i < rooster.quantity; i++){
+	var x = random(0, 420);
+	rooster.positionsX.push(x);
+	var y = random(0, 420);
+	rooster.positionsY.push(y);
+}
+
+for (var i=0; i < pig.quantity; i++){
+	var x = random(0, 420);
+	pig.positionsX.push(x);
+	var y = random(0, 420);
+	pig.positionsY.push(y);
 }
 
 background.image = new Image();
@@ -94,3 +147,36 @@ rooster.image.addEventListener("load", loadRoosters);
 pig.image = new Image();
 pig.image.src = pig.url;
 pig.image.addEventListener("load", loadPigs);
+
+
+wolf.image = new Image();
+wolf.image.src = wolf.url;
+wolf.image.addEventListener("load", loadWolf);
+
+
+function keyboardDraw(event){
+	switch(event.keyCode){
+		case keys.LEFT:
+			wolf.positionX -= wolf.movement;
+			paint();
+		break;
+
+	  	case keys.UP:
+			wolf.positionY -= wolf.movement;
+			paint();
+	  	break;
+  
+		case keys.RIGHT:
+			wolf.positionX += wolf.movement;
+			paint();  
+		break;
+  
+		case keys.DOWN:	
+	  		wolf.positionY += wolf.movement;
+			paint();
+		break;
+
+		default:
+		break;
+	}
+}
