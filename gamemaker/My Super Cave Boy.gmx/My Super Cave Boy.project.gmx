@@ -6,19 +6,30 @@
   <NewExtensions/>
   <sounds name="sound"/>
   <sprites name="sprites">
-    <sprite>sprites\spr_player_idle</sprite>
-    <sprite>sprites\spr_player_walk</sprite>
-    <sprite>sprites\spr_player_damage</sprite>
-    <sprite>sprites\spr_edge_grab</sprite>
-    <sprite>sprites\spr_player_exit</sprite>
-    <sprite>sprites\spr_player_mask</sprite>
-    <sprite>sprites\spr_player_jump</sprite>
+    <sprites name="Player">
+      <sprite>sprites\spr_player_walk</sprite>
+      <sprite>sprites\spr_player_damage</sprite>
+      <sprite>sprites\spr_edge_grab</sprite>
+      <sprite>sprites\spr_player_exit</sprite>
+      <sprite>sprites\spr_player_mask</sprite>
+      <sprite>sprites\spr_player_idle</sprite>
+      <sprite>sprites\spr_player_jump</sprite>
+    </sprites>
+    <sprites name="Level">
+      <sprite>sprites\spr_solid</sprite>
+      <sprite>sprites\spr_dirt</sprite>
+      <sprite>sprites\sprite9</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
   <objects name="objects">
     <objects name="Player">
       <object>objects\Player</object>
+    </objects>
+    <objects name="Level">
+      <object>objects\Solid</object>
+      <object>objects\Dirt</object>
     </objects>
   </objects>
   <rooms name="rooms">
