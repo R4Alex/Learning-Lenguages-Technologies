@@ -34,7 +34,7 @@ global.faster_spd = 15;
 spd = 5;
 hspd = 0;
 vspd = 0;
-
+grav = 1.5;
 
 
 </string>
@@ -64,7 +64,26 @@ vspd = 0;
 var right = keyboard_check(vk_right);
 var left = keyboard_check(vk_left);
 var up = keyboard_check(vk_up);
+var up_release = keyboard_check_released(vk_up);
 var down = keyboard_check(vk_down);
+
+if (!place_meeting(x, y + 1, Solid)) {
+    vspd += grav;
+    
+    // Control jump height
+    if (up_release &amp;&amp; vspd &lt; -6) {
+        vspd = -6;
+    }
+    
+} else {
+    vspd = 0;
+    
+    // Jumping Code
+    if (up) {
+        vspd = -16;
+    } 
+}
+
 
 if (right) {
     hspd = spd;
@@ -75,21 +94,10 @@ if (left) {
     hspd = -spd;
 }
 
-if (up) {
-    vspd = -spd;
-}
-
-if (down) {
-    vspd = spd;
-}
 
 // Friction
 if (!right &amp;&amp; !left) {
     hspd = 0;
-}
-
-if (!up and !down) {
-    vspd = 0;    
 }
 
 // player movement
@@ -102,7 +110,6 @@ if (place_meeting(x + hspd, y, Solid)) {
 }
 
 x += hspd;
-
 
 // Vertical Collisions
 if (place_meeting(x, y + vspd, Solid)) {
