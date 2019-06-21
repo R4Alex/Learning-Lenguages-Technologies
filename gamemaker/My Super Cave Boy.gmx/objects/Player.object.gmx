@@ -40,6 +40,8 @@ var total = add(5, 6);
 //spd = total;
 //or
 // script_execute(add);
+
+state = move_state;
 </string>
           </argument>
         </arguments>
@@ -62,50 +64,38 @@ var total = add(5, 6);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Control the player
+            <string>/// Control the Player's states
 
-var right = keyboard_check(vk_right);
-var left = keyboard_check(vk_left);
-var up = keyboard_check(vk_up);
-var up_release = keyboard_check_released(vk_up);
-var down = keyboard_check(vk_down);
+script_execute(state);
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="13">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// Change state
 
-if (!place_meeting(x, y + 1, Solid)) {
-    vspd += grav;
-    
-    // Control jump height
-    if (up_release &amp;&amp; vspd &lt; -6) {
-        vspd = -6;
-    }
-    
+if (state == pause_state) {
+    state = move_state;
 } else {
-    vspd = 0;
-    
-    // Jumping Code
-    if (up) {
-        vspd = -16;
-    } 
+    state = pause_state;
 }
-
-
-if (right) {
-    hspd = spd;
-    
-}
-
-if (left) {
-    hspd = -spd;
-}
-
-
-// Friction
-if (!right &amp;&amp; !left) {
-    hspd = 0;
-}
-
-move(Solid);
-
-
 </string>
           </argument>
         </arguments>
