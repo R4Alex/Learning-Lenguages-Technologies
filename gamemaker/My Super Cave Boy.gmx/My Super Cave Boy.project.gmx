@@ -23,6 +23,12 @@
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
+  <scripts name="scripts">
+    <script>scripts\add.gml</script>
+    <scripts name="Helper Scripts">
+      <script>scripts\move.gml</script>
+    </scripts>
+  </scripts>
   <objects name="objects">
     <objects name="Player">
       <object>objects\Player</object>
