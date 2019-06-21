@@ -36,7 +36,10 @@ hspd = 0;
 vspd = 0;
 grav = 1.5;
 
-
+var total = add(5, 6);
+//spd = total;
+//or
+// script_execute(add);
 </string>
           </argument>
         </arguments>
@@ -100,32 +103,7 @@ if (!right &amp;&amp; !left) {
     hspd = 0;
 }
 
-// player movement
-// Horizontal Collisions
-if (place_meeting(x + hspd, y, Solid)) {
-    while (!place_meeting(x + sign(hspd), y, Solid)) {
-        x += sign(hspd);
-    }
-    hspd = 0;
-}
-
-x += hspd;
-
-// Vertical Collisions
-if (place_meeting(x, y + vspd, Solid)) {
-    while(!place_meeting(x, y + sign(vspd), Solid)) {
-        y += sign(vspd);
-    }
-    vspd = 0;
-}
-
-y += vspd;
-
-
-
-
-
-
+move(Solid);
 
 
 </string>
