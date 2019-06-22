@@ -21,6 +21,13 @@
       <sprite>sprites\spr_dirt</sprite>
       <sprite>sprites\sprite9</sprite>
     </sprites>
+    <sprites name="Enemies">
+      <sprite>sprites\spr_snake</sprite>
+      <sprite>sprites\spr_bat_fly</sprite>
+      <sprite>sprites\spr_bat_idle</sprite>
+      <sprite>sprites\spr_enemy_mask</sprite>
+      <sprite>sprites\spr_spider</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -28,12 +35,26 @@
     <script>scripts\add.gml</script>
     <scripts name="Helper Scripts">
       <script>scripts\move.gml</script>
+      <script>scripts\horizontral_move_bounce.gml</script>
       <script>scripts\apply_friction.gml</script>
+      <script>scripts\execute_state.gml</script>
     </scripts>
     <scripts name="Player States">
       <script>scripts\move_state.gml</script>
       <script>scripts\pause_state.gml</script>
       <script>scripts\ledge_grab_state.gml</script>
+    </scripts>
+    <scripts name="Snake States">
+      <script>scripts\snake_move_right_state.gml</script>
+      <script>scripts\snake_move_left_state.gml</script>
+    </scripts>
+    <scripts name="Bat States">
+      <script>scripts\bat_idle_state.gml</script>
+      <script>scripts\bat_chase_state.gml</script>
+    </scripts>
+    <scripts name="spider_states">
+      <script>scripts\spider_idle_state.gml</script>
+      <script>scripts\spider_jump_state.gml</script>
     </scripts>
   </scripts>
   <objects name="objects">
@@ -43,6 +64,11 @@
     <objects name="Level">
       <object>objects\Solid</object>
       <object>objects\Dirt</object>
+    </objects>
+    <objects name="Enemies">
+      <object>objects\Snake</object>
+      <object>objects\Bat</object>
+      <object>objects\Spider</object>
     </objects>
   </objects>
   <rooms name="rooms">
