@@ -10,6 +10,13 @@ var down = keyboard_check(vk_down);
 if (!place_meeting(x, y + 1, Solid)) {
     vspd += grav;
     
+    // Player is in the air
+    sprite_index = spr_player_jump;
+    image_speed = 0;
+    // Trick image index just get 2 values 0 or 1 what we need in this specific sprite
+    image_index = (vspd > 0);
+    
+    
     // Control jump height
     if (up_release && vspd < -6) {
         vspd = -6;
@@ -21,7 +28,15 @@ if (!place_meeting(x, y + 1, Solid)) {
     // Jumping Code
     if (up) {
         vspd = -16;
-    } 
+    }
+    
+    // Player is on the ground 
+    if (hspd == 0) {
+        sprite_index = spr_player_idle;
+    } else {
+        sprite_index = spr_player_walk;
+        image_speed = .5;
+    }
 }
 
 
@@ -64,8 +79,9 @@ if(falling and wasnt_wall and iswall) {
         y -= 1;
     }
     
-    
+    sprite_index = spr_player_ledge_grab;
     state = ledge_grab_state;
 }
+
 
 
