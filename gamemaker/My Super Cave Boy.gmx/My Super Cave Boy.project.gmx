@@ -14,6 +14,7 @@
       <sprite>sprites\spr_player_mask</sprite>
       <sprite>sprites\spr_player_idle</sprite>
       <sprite>sprites\spr_player_jump</sprite>
+      <sprite>sprites\spr_player_ledge_grab</sprite>
     </sprites>
     <sprites name="Level">
       <sprite>sprites\spr_solid</sprite>
