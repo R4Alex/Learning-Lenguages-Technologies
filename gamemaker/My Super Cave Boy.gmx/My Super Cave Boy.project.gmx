@@ -28,6 +28,7 @@
     <script>scripts\add.gml</script>
     <scripts name="Helper Scripts">
       <script>scripts\move.gml</script>
+      <script>scripts\apply_friction.gml</script>
     </scripts>
     <scripts name="Player States">
       <script>scripts\move_state.gml</script>

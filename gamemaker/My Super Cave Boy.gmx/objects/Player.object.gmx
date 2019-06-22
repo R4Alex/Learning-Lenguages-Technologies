@@ -31,12 +31,14 @@ var faster_spd = 10;
 global.faster_spd = 15;
 
 
-spd = 5;
+spd = 8;
+acc = 2;
 hspd = 0;
 vspd = 0;
 grav = 1.5;
 
 var total = add(5, 6);
+
 //spd = total;
 //or
 // script_execute(add);
