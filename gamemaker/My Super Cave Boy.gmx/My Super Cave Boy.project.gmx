@@ -8,7 +8,7 @@
   <sprites name="sprites">
     <sprites name="Player">
       <sprite>sprites\spr_player_walk</sprite>
-      <sprite>sprites\spr_player_damage</sprite>
+      <sprite>sprites\spr_player_hurt</sprite>
       <sprite>sprites\spr_edge_grab</sprite>
       <sprite>sprites\spr_player_exit</sprite>
       <sprite>sprites\spr_player_mask</sprite>
@@ -28,6 +28,12 @@
       <sprite>sprites\spr_enemy_mask</sprite>
       <sprite>sprites\spr_spider</sprite>
     </sprites>
+    <sprites name="GUI Icon">
+      <sprite>sprites\spr_heart</sprite>
+    </sprites>
+    <sprites name="Effects">
+      <sprite>sprites\spr_blood</sprite>
+    </sprites>
   </sprites>
   <backgrounds name="background"/>
   <paths name="paths"/>
@@ -35,6 +41,7 @@
     <script>scripts\add.gml</script>
     <scripts name="Helper Scripts">
       <script>scripts\move.gml</script>
+      <script>scripts\direction_move_bounce.gml</script>
       <script>scripts\horizontral_move_bounce.gml</script>
       <script>scripts\apply_friction.gml</script>
       <script>scripts\execute_state.gml</script>
@@ -43,6 +50,7 @@
       <script>scripts\move_state.gml</script>
       <script>scripts\pause_state.gml</script>
       <script>scripts\ledge_grab_state.gml</script>
+      <script>scripts\hurt_state.gml</script>
     </scripts>
     <scripts name="Snake States">
       <script>scripts\snake_move_right_state.gml</script>
@@ -60,15 +68,20 @@
   <objects name="objects">
     <objects name="Player">
       <object>objects\Player</object>
+      <object>objects\PlayerStats</object>
     </objects>
     <objects name="Level">
       <object>objects\Solid</object>
       <object>objects\Dirt</object>
     </objects>
     <objects name="Enemies">
+      <object>objects\EnemyParent</object>
       <object>objects\Snake</object>
       <object>objects\Bat</object>
       <object>objects\Spider</object>
+    </objects>
+    <objects name="Effects">
+      <object>objects\Blood</object>
     </objects>
   </objects>
   <rooms name="rooms">
