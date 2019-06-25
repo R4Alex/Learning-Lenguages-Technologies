@@ -3,7 +3,7 @@
   <spriteName>spr_bat_idle</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-12</depth>
   <persistent>0</persistent>
   <parentName>EnemyParent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -36,7 +36,7 @@ spd = 2;
 
 state = bat_idle_state;
 
-sight = 150;
+sight = 180;
 </string>
           </argument>
         </arguments>

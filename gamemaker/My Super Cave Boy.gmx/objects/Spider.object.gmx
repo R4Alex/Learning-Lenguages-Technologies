@@ -3,7 +3,7 @@
   <spriteName>spr_spider</spriteName>
   <solid>0</solid>
   <visible>-1</visible>
-  <depth>0</depth>
+  <depth>-5</depth>
   <persistent>0</persistent>
   <parentName>EnemyParent</parentName>
   <maskName>&lt;undefined&gt;</maskName>
@@ -29,7 +29,7 @@
 image_speed = 0;
 image_index = 0;
 
-sight = 128;
+sight = 320;
 spd = 6;
 acc = 2;
 grav = 1;
