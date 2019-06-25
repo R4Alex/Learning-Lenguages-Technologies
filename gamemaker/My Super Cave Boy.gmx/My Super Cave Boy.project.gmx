@@ -19,7 +19,10 @@
     <sprites name="Level">
       <sprite>sprites\spr_solid</sprite>
       <sprite>sprites\spr_dirt</sprite>
-      <sprite>sprites\sprite9</sprite>
+      <sprite>sprites\spr_entrence</sprite>
+      <sprite>sprites\spr_exit</sprite>
+      <sprite>sprites\spr_dirt_top</sprite>
+      <sprite>sprites\spr_dirt_edge</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_snake</sprite>
@@ -35,7 +38,9 @@
       <sprite>sprites\spr_blood</sprite>
     </sprites>
   </sprites>
-  <backgrounds name="background"/>
+  <backgrounds name="background">
+    <background>background\bg_dirt</background>
+  </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
     <script>scripts\add.gml</script>
@@ -51,6 +56,7 @@
       <script>scripts\pause_state.gml</script>
       <script>scripts\ledge_grab_state.gml</script>
       <script>scripts\hurt_state.gml</script>
+      <script>scripts\exit_state.gml</script>
     </scripts>
     <scripts name="Snake States">
       <script>scripts\snake_move_right_state.gml</script>
@@ -73,6 +79,9 @@
     <objects name="Level">
       <object>objects\Solid</object>
       <object>objects\Dirt</object>
+      <object>objects\Entrence</object>
+      <object>objects\Exit</object>
+      <object>objects\Backgroud</object>
     </objects>
     <objects name="Enemies">
       <object>objects\EnemyParent</object>
@@ -86,6 +95,10 @@
   </objects>
   <rooms name="rooms">
     <room>rooms\rm_one</room>
+    <room>rooms\rm_two</room>
+    <room>rooms\room_three</room>
+    <room>rooms\room_four</room>
+    <room>rooms\rm_mine</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
