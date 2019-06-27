@@ -45,6 +45,8 @@ var total = add(5, 6);
 
 state = move_state;
 
+get_input();
+
 
 //sprite_index = spr_player_walk;
 //image_speed = .5;
@@ -52,7 +54,6 @@ state = move_state;
 
 //image_xscale = 2;
 //image_yscale = 2;
-
 
 
 </string>
@@ -78,7 +79,7 @@ state = move_state;
           <argument>
             <kind>1</kind>
             <string>/// Control the Player's states
-
+get_input();
 script_execute(state);
 </string>
           </argument>
@@ -165,7 +166,7 @@ if (above_enemy &amp;&amp; (falling || state = ledge_grab_state)) {
             <kind>1</kind>
             <string>/// Go to the next Level
 
-if (keyboard_check(vk_up)) {
+if (up) {
     y = yprevious;
     state = exit_state;
 }
