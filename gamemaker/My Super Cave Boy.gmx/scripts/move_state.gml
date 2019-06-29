@@ -21,6 +21,7 @@ if (!place_meeting(x, y + 1, Solid)) {
     // Jumping Code
     if (up) {
         vspd = -16;
+        audio_play_sound(snd_jump, 5, false);
     }
     
     // Player is on the ground 
@@ -64,9 +65,16 @@ if (hspd != 0){
     image_xscale = sign(hspd);
 }
 
-
+//Play landing sound
+if (place_meeting(x, y+vspd+1, Solid) and vspd > 0) {
+    audio_emitter_pitch(audio_em, random_range(0.8, 1.2));
+    audio_emitter_gain(audio_em, 0.2);
+    audio_play_sound_on(audio_em, snd_step, false, 6);
+    
+}
 
 move(Solid);
+
 
 /// Check for ledge grab state
 var falling = y - yprevious > 0;
@@ -89,6 +97,11 @@ if(falling and wasnt_wall and iswall) {
     
     sprite_index = spr_player_ledge_grab;
     state = ledge_grab_state;
+    //Play the ledge grab sound
+    audio_emitter_pitch(audio_em, 1.5);
+    audio_emitter_gain(audio_em, 0.1);
+    audio_play_sound_on(audio_em, snd_step, false, 6);
+    
 }
 
 
