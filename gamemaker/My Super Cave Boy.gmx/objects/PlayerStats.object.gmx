@@ -174,7 +174,7 @@ switch (room) {
         draw_sprite_ext(spr_gui_sapphire, 0, 36 + maxhp * 36, 20, 1, 1, 0, cw, 1);
         draw_set_halign(fa_left);
         draw_set_font(fnt_start);
-        draw_text_colour(64 + hp * 32, 2, "x" + string(sapphires), cw, cw, cw, cw, 1);
+        draw_text_colour(64 + maxhp * 32, 2, "x" + string(sapphires), cw, cw, cw, cw, 1);
         
         // Adding to the time
         time += 1;
