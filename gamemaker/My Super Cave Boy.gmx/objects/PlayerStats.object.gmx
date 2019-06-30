@@ -33,7 +33,49 @@ display_set_gui_size(view_wview[0], view_hview[0]);
 hp = 3;
 maxhp = 3;
 
+sapphires = 0;
+score = 0;
+highscore = 0;
+time = 0;
 
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="3" enumb="0">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>/// To start the game
+
+if (room == rm_menu) {
+    var start;
+    if (gamepad_is_connected(0)) {
+        start = gamepad_button_check_pressed(0, gp_start);
+    } else{
+        start = keyboard_check_pressed(vk_space);
+    }
+    
+    if (start) {
+        room_goto(rm_one);
+    }
+}
 </string>
           </argument>
         </arguments>
@@ -56,7 +98,7 @@ maxhp = 3;
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>// Play the backgroun music
+            <string>/// Play the backgroun music
 
 audio_em = audio_emitter_create();
 audio_emitter_gain(audio_em, 0.1);
@@ -84,17 +126,91 @@ audio_play_sound_on(audio_em, snd_music, true, 10);
         <arguments>
           <argument>
             <kind>1</kind>
-            <string>/// Drae the stats
+            <string>/// Draw the stats
+switch (room) {
+    
+    case rm_highscore:
+        draw_set_halign(fa_center);
+        draw_text_colour(view_wview[0]/2, 64, "Your Time Was: " + string(floor(time/room_speed)), cw, cw, cw, cw, 1);
+        draw_text_colour(view_wview[0]/2, 96, "Your Score Was: " + string(score), cw, cw, cw, cw, 1);
+        draw_text_colour(view_wview[0]/2, 128, "The Highscore Is: " + string(highscore), cw, cw, cw, cw, 1);
+    break;
+    
+    case rm_menu:
+        cw = c_white;
+        cb = c_black;
+        draw_set_halign(fa_center);
+        draw_set_font(fnt_title);
+        draw_text_colour(room_width/2+4, 16+6, "My Super Cave Boy", cb, cb, cb, cb, 1);
+        draw_text_colour(room_width/2, 16, "My Super Cave Boy", cw, cw, cw, cw, 1);
 
-for (var i=0; i &lt; maxhp; i++) {
-    draw_sprite_ext(spr_heart, 0, 24 + i * 36, 20, 1, 1, 0, c_black, 0.5);
+        var str;
+        if (gamepad_is_connected(0)) {
+            str = "Press [Start] to play"
+        } else {
+            str = "Press [Space] to play"
+        }
+        
+        // start message
+        draw_set_font(fnt_start);
+        draw_text_colour(room_width/2+2, 56, str, cb, cb, cb, cb, 1);
+        draw_text_colour(room_width/2, 56, str, cw, cw, cw, cw, 1);
+        
+    break;
+    
+    default:
+        cw = c_white;
+        // Draw the hearts spaces 
+        for (var i=0; i &lt; maxhp; i++) {
+            draw_sprite_ext(spr_heart, 0, 24 + i * 36, 20, 1, 1, 0, c_black, 0.5);
+        }
+        
+        // Draw the hearts
+        for (var i=0; i &lt; hp; i++) {
+            draw_sprite_ext(spr_heart, 0, 24 + i * 36, 20, 1, 1, 0, cw, 1);
+        }
+        
+        // Draw Sapphire count
+        draw_sprite_ext(spr_gui_sapphire, 0, 36 + maxhp * 36, 20, 1, 1, 0, cw, 1);
+        draw_set_halign(fa_left);
+        draw_set_font(fnt_start);
+        draw_text_colour(64 + hp * 32, 2, "x" + string(sapphires), cw, cw, cw, cw, 1);
+        
+        // Adding to the time
+        time += 1;
+        // Draw the timer
+        draw_text_colour(view_wview[0]/2, 8, string(floor(time/room_speed)), cw, cw, cw, cw, 1);
+    break;
 }
 
-// Draw the hearts
-for (var i=0; i &lt; hp; i++) {
-    draw_sprite_ext(spr_heart, 0, 24 + i * 36, 20, 1, 1, 0, c_white, 1);
-}
 
+
+
+</string>
+          </argument>
+        </arguments>
+      </action>
+    </event>
+    <event eventtype="9" enumb="27">
+      <action>
+        <libid>1</libid>
+        <id>603</id>
+        <kind>7</kind>
+        <userelative>0</userelative>
+        <isquestion>0</isquestion>
+        <useapplyto>-1</useapplyto>
+        <exetype>2</exetype>
+        <functionname></functionname>
+        <codestring></codestring>
+        <whoName>self</whoName>
+        <relative>0</relative>
+        <isnot>0</isnot>
+        <arguments>
+          <argument>
+            <kind>1</kind>
+            <string>// End the game
+
+game_end();
 </string>
           </argument>
         </arguments>

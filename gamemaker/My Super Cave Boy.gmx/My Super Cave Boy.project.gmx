@@ -33,6 +33,7 @@
       <sprite>sprites\spr_exit</sprite>
       <sprite>sprites\spr_dirt_top</sprite>
       <sprite>sprites\spr_dirt_edge</sprite>
+      <sprite>sprites\spr_sapphjire</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_snake</sprite>
@@ -43,13 +44,16 @@
     </sprites>
     <sprites name="GUI Icon">
       <sprite>sprites\spr_heart</sprite>
+      <sprite>sprites\spr_gui_sapphire</sprite>
     </sprites>
     <sprites name="Effects">
       <sprite>sprites\spr_blood</sprite>
+      <sprite>sprites\spr_sapphire_chunk</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
     <background>background\bg_dirt</background>
+    <background>background\bg_menu</background>
   </backgrounds>
   <paths name="paths"/>
   <scripts name="scripts">
@@ -77,11 +81,15 @@
       <script>scripts\bat_idle_state.gml</script>
       <script>scripts\bat_chase_state.gml</script>
     </scripts>
-    <scripts name="spider_states">
+    <scripts name="Spider States">
       <script>scripts\spider_idle_state.gml</script>
       <script>scripts\spider_jump_state.gml</script>
     </scripts>
   </scripts>
+  <fonts name="fonts">
+    <font>fonts\fnt_title</font>
+    <font>fonts\fnt_start</font>
+  </fonts>
   <objects name="objects">
     <objects name="Player">
       <object>objects\Player</object>
@@ -93,6 +101,7 @@
       <object>objects\Entrence</object>
       <object>objects\Exit</object>
       <object>objects\Backgroud</object>
+      <object>objects\Sapphire</object>
     </objects>
     <objects name="Enemies">
       <object>objects\EnemyParent</object>
@@ -102,9 +111,12 @@
     </objects>
     <objects name="Effects">
       <object>objects\Blood</object>
+      <object>objects\SappharieChunk</object>
     </objects>
   </objects>
   <rooms name="rooms">
+    <room>rooms\rm_menu</room>
+    <room>rooms\rm_highscore</room>
     <room>rooms\rm_one</room>
     <room>rooms\rm_two</room>
     <room>rooms\room_three</room>
