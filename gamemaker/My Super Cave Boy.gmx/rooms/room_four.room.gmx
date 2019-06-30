@@ -183,6 +183,7 @@
     <instance objName="Dirt" x="224" y="288" name="inst_440BDAD0" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Dirt" x="288" y="288" name="inst_AAFD4238" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
     <instance objName="Dirt" x="320" y="288" name="inst_FDC74C05" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
+    <instance objName="Sapphire" x="256" y="224" name="inst_C4E1C457" locked="0" code="" scaleX="1" scaleY="1" colour="4294967295" rotation="0"/>
   </instances>
   <tiles/>
   <PhysicsWorld>0</PhysicsWorld>
