@@ -14,6 +14,7 @@
     <sound>sound\snd_ouch</sound>
     <sound>sound\snd_snake</sound>
     <sound>sound\snd_music</sound>
+    <sound>sound\snd_boss_music</sound>
   </sounds>
   <sprites name="sprites">
     <sprites name="Player">
@@ -34,6 +35,7 @@
       <sprite>sprites\spr_dirt_top</sprite>
       <sprite>sprites\spr_dirt_edge</sprite>
       <sprite>sprites\spr_sapphjire</sprite>
+      <sprite>sprites\spr_lava</sprite>
     </sprites>
     <sprites name="Enemies">
       <sprite>sprites\spr_snake</sprite>
@@ -49,6 +51,10 @@
     <sprites name="Effects">
       <sprite>sprites\spr_blood</sprite>
       <sprite>sprites\spr_sapphire_chunk</sprite>
+      <sprite>sprites\spr_fire_bubble</sprite>
+    </sprites>
+    <sprites name="Boss">
+      <sprite>sprites\spr_boss</sprite>
     </sprites>
   </sprites>
   <backgrounds name="background">
@@ -65,6 +71,7 @@
       <script>scripts\apply_friction.gml</script>
       <script>scripts\execute_state.gml</script>
       <script>scripts\get_input.gml</script>
+      <script>scripts\take_damage.gml</script>
     </scripts>
     <scripts name="Player States">
       <script>scripts\move_state.gml</script>
@@ -85,6 +92,13 @@
       <script>scripts\spider_idle_state.gml</script>
       <script>scripts\spider_jump_state.gml</script>
     </scripts>
+    <scripts name="Boss States">
+      <script>scripts\boss_idle_state.gml</script>
+      <script>scripts\boss_lift_state.gml</script>
+      <script>scripts\boss_chase_state.gml</script>
+      <script>scripts\boss_smash_state.gml</script>
+      <script>scripts\boss_stall_state.gml</script>
+    </scripts>
   </scripts>
   <fonts name="fonts">
     <font>fonts\fnt_title</font>
@@ -102,6 +116,7 @@
       <object>objects\Exit</object>
       <object>objects\Backgroud</object>
       <object>objects\Sapphire</object>
+      <object>objects\Lava</object>
     </objects>
     <objects name="Enemies">
       <object>objects\EnemyParent</object>
@@ -112,6 +127,10 @@
     <objects name="Effects">
       <object>objects\Blood</object>
       <object>objects\SappharieChunk</object>
+      <object>objects\FireBubble</object>
+    </objects>
+    <objects name="Boss">
+      <object>objects\Boss</object>
     </objects>
   </objects>
   <rooms name="rooms">
@@ -122,6 +141,7 @@
     <room>rooms\room_three</room>
     <room>rooms\room_four</room>
     <room>rooms\rm_mine</room>
+    <room>rooms\rm_boss</room>
   </rooms>
   <help>
     <rtf>help.rtf</rtf>
