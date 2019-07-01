@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api
-
+from odoo import models, fields, api, exceptions
+from psycopg2 import IntegrityError
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -18,7 +18,38 @@ class Course(models.Model):
         ondelete='set null',
         default=lambda self, *a: self.env.uid)
     session_ids = fields.One2many('openacademy.session', 'course_id')
+    
+    _sql_constraints = [
+        ('name_description_check',
+         'CHECK( name != description )',
+         "The title of the curse should not be the description"),
 
+        ('name_unique',
+         'UNIQUE(name)',
+         "The course title must be unique"),
+    ]
+    
+    
+    def copy(self, default=None):
+        if default is None:
+            default = {}
+        
+        copied_count = self.search_count([
+            ('name', 'ilike', 'Copy of %s%%' % (self.name))])
+
+        if not copied_count:
+            new_name = "Copy of %s" % (self.name)
+        else:
+            new_name = "Copy of %s (%s)" % (self.name, copied_count)
+        
+        default['name'] = new_name
+
+        return super(Course, self).copy(default)
+        
+        #try:
+        #    return super(Course, self).copy(default)
+        #except IntegrityError:
+        #    import pdb; pdb.set_trace()
 
 class Session(models.Model):
     _name = 'openacademy.session'
@@ -28,7 +59,7 @@ class Session(models.Model):
     start_date = fields.Date(default=fields.Date.today)
     duration = fields.Float(digits=(6,2), help="Duration in days")
     seats = fields.Integer(string="Number of seats")
-    instructor_id = fields.Many2one('res.partner', string='instructor', domain=['|', ('instructor', '=', True), ('category_id.name', 'ilike', 'Teacher')])
+    instructor_id = fields.Many2one('res.partner', string='instructor', domain=['|', ('instructor_id', '=', True), ('category_id.name', 'ilike', 'Teacher')])
 
     course_id = fields.Many2one(
         'openacademy.course', 
@@ -37,7 +68,7 @@ class Session(models.Model):
         required=True)
 
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
-    taken_seats = fields.Float(compute="_taken_seats");
+    taken_seats = fields.Float(compute="_taken_seats", store=True);
     active = fields.Boolean(default=True)
     
     
@@ -50,4 +81,37 @@ class Session(models.Model):
                 record.taken_seats = 0
             else:
                 record.taken_seats = 100.0 * len(record.attendee_ids) / record.seats
-                
+
+
+    @api.onchange('seats', 'attendee_ids')
+    def _verify_valid_seats(self):
+        #if self.seats < 0:
+        if self.filtered(lambda r: r.seats < 0):
+            self.active = False
+            return {
+                'warning': {
+                    'title': "Incorrect 'seats' value",
+                    'message': "The number of availible seats may not be negative",
+                }
+            }
+
+        if self.seats < len(self.attendee_ids):
+            self.active = True
+            return {
+                'warning': {
+                    'title': "To many attendees",
+                    'message': "Increse seats or remove excess attendees",
+                }
+            } 
+
+        self.active = True
+
+
+    @api.constrains('instructor_id', 'attendee_ids')
+    def _check_instructor_not_in_attendees(self):
+        for record in self.filtered('instructor_id'):
+            if record.instructor_id in record.attendee_ids:
+                raise exceptions.ValidationError(
+                        "A session's instructor can't be an attendee")
+
+    
