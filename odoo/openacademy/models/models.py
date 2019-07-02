@@ -2,6 +2,7 @@
 
 from odoo import models, fields, api, exceptions
 from psycopg2 import IntegrityError
+from datetime import timedelta
 
 class Course(models.Model):
     _name = 'openacademy.course'
@@ -70,8 +71,50 @@ class Session(models.Model):
     attendee_ids = fields.Many2many('res.partner', string="Attendees")
     taken_seats = fields.Float(compute="_taken_seats", store=True);
     active = fields.Boolean(default=True)
+    end_date = fields.Date(store=True, compute="_get_end_date", inverse="_set_end_date")
+    attendees_count = fields.Integer(compute="_get_attendees_count", store=True)
+
+    # to make a kanbam view 
+    color = fields.Float()
+    
+    # Gantt view
+    hours = fields.Float(string="Duration in hours", compute='_get_hours', inverse='_set_hours')
     
     
+    
+    @api.depends('duration')
+    def _get_hours(self):
+        for record in self:
+            record.hours = record.duration * 24
+    
+    
+    @api.depends('duration')
+    def _set_hours(self):
+        for record in self:
+            record.duration = record.hours / 24
+
+    
+    @api.depends('attendee_ids')
+    def _get_attendees_count(self):
+        for record in self:
+            record.attendees_count = len(record.attendee_ids)
+
+
+
+
+    @api.depends('start_date', 'duration')
+    def _get_end_date(self):
+        for record in self.filtered('start_date'):
+            #start_date = fields.Datetime.from_string(record.start_date) on odoo10 start_date is a unicode on 12 is a date so
+            record.end_date = record.start_date + timedelta(days=record.duration, seconds=-1)
+
+
+    @api.depends('start_date', 'duration')
+    def _set_end_date(self):
+        for record in self.filtered('start_date'):
+            record.duration = (record.end_date - record.start_date).days + 1
+
+
     @api.depends('seats', 'attendee_ids')
     def _taken_seats(self):
         #for record in self:
