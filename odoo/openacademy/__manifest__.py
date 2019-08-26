@@ -22,6 +22,7 @@
     # any module necessary for this one to work correctly
     'depends': [
         'base',
+        'board',
     ],
 
     # always loaded
@@ -30,6 +31,7 @@
         'security/ir.model.access.csv',
         'views/views.xml',
         'views/partner.xml',
+        'views/session_board.xml',
         'reports/reports.xml',
     ],
     
