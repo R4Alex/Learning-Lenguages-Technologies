@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-from odoo import models, fields, api, exceptions
+from odoo import models, fields, api, exceptions, _
 from psycopg2 import IntegrityError
 from datetime import timedelta
 
@@ -36,12 +36,12 @@ class Course(models.Model):
             default = {}
         
         copied_count = self.search_count([
-            ('name', 'ilike', 'Copy of %s%%' % (self.name))])
+            ('name', 'ilike', _('Copy of %s%%') % (self.name))])
 
         if not copied_count:
-            new_name = "Copy of %s" % (self.name)
+            new_name = _("Copy of %s") % (self.name)
         else:
-            new_name = "Copy of %s (%s)" % (self.name, copied_count)
+            new_name = _("Copy of %s (%s)") % (self.name, copied_count)
         
         default['name'] = new_name
 
