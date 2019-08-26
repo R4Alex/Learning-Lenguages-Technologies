@@ -86,6 +86,7 @@ def show_menu():
 
 
 print("Welcome to your restaurant!")
+
 create_database()
 
 message = "Menu:\n1. Add a Category\n2. Add a Plate\n3. Show Menu\n4. Exit\n"
