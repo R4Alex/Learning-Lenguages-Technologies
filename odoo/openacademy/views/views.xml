@@ -1,3 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
 <odoo>
     <record model="ir.ui.view" id="openacademy_course_form_view">
         <field name="name">course.form</field>
@@ -54,6 +56,14 @@
             <search string="Courses Search">
                 <field name="name" string="Name search"/>
                 <field name="description"/>
+                
+                <filter name="my_courses" string="My courses" domain="[('responsible_id', '=', uid)]"/>
+                
+                <group string="Group By">
+                    <filter name="by_responsible" string="Responsable"
+                            context="{'group_by': 'responsible_id'}"/>
+                </group>
+                
             </search>
         </field>
 
@@ -70,12 +80,15 @@
                     <group>
                         <field name="name"/>
                         <field name="start_date"/>
+                        <field name="end_date"/>
                         <field name="duration"/>
                         <field name="seats"/>
-                        <field name="instructor_id"/>
-                        <field name="course_id"/>
+                        <field name="taken_seats" widget="progressbar"/>
+                        <field name="instructor_id" widget="selection"/>
+                        <field name="course_id" options="{'no_create': True, 'no_open': True}"/>
                         <label for="attendee_ids"/>
                         <field name="attendee_ids" nolabel="1"/>
+                        <field name="active"/>
                     </group>
                 </sheet>
             </form>
@@ -86,33 +99,113 @@
         <field name="name">openacademy.session.list</field>
         <field name="model">openacademy.session</field>
         <field name="arch" type="xml">
-            <tree string="Sessions List">
+            <!--tree string="Sessions List" colors="blue:duration &lt; 5;#EF1111:duration &gt; 15"-->
+            <!--editable="bottom"-->
+            <tree string="Sessions List" decoration-info="duration &lt; 5" decoration-danger="duration &gt; 15">
                 <field name="name"/>
                 <field name="start_date"/>
-                <field name="duration"/>
+                <field name="duration" invisible="1"/>
+                <field name="end_date"/>
                 <field name="seats"/>
-                <field name="instructor_id"/>
+                <field name="instructor_id" widget="selection"/>
                 <field name="course_id"/>
+                <field name="taken_seats" widget="progressbar"/>
             </tree>
         </field>
     </record>
     
+    <record model="ir.ui.view" id="session_calendar_view">
+        <field name="name">session.calendar</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <calendar string="Session Calendar" date_start="start_date" date_stop="end_date" color="instructor_id">
+                <field name="name"/>
+            </calendar>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="session_graph_view">
+        <field name="name">session.graph</field>
+        <field name="model">openacademy.session</field>
+        
+        <field name="arch" type="xml">
+            <graph string="Participations by Courses">
+                <!--type="row" is the default type value-->
+                <field name="course_id" type="row"/>
+                <field name="attendees_count" type="measure"/>
+            </graph>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="view_openacad_session_kanban">
+        <field name="name">openacademy.session.kanban</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="instructor_id">
+                <field name="color"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_color_{{kanban_getcolor(record.color.raw_value)}}
+                                          oe_kanban_global_click_edit oe_semantic_html_override
+                                          oe_kanban_card {{record.group_fancy==1 ? 'oe_kanban_card_fancy' : ''}}">
+                            
+                            <div class="oe_dropdown_kanban">
+                            <!-- dropdown menu -->
+                                <div class="oe_dropdown_toggle">
+                                    <!--i class="fa fa-bars fa-lg"/-->
+                                    
+                                    <ul class="oe_dropdown_menu">
+                                        <li><a type="delete">Delete</a></li>
+                                        <li><ul class="oe_kanban_colorpicker" data-field="color"/></li>
+                                    </ul>
+                                </div>
+                                <div class="oe_clear"></div>
+                            </div>
+
+                            <div t-attf-class="oe_kanban_content">
+                                <!-- title -->
+                                Session name: <field name="name"/><br/>
+                                Start date: <field name="start_date"/><br/>
+                                duration:<field name="duration"/>
+                            </div>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+    
+    <record model="ir.ui.view" id="session_gantt_view">
+        <field name="name">session.gantt</field>
+        <field name="model">openacademy.session</field>
+        <field name="arch" type="xml">
+            <gantt string="Session Gantt" default_group_by="instructor_id"
+                    date_start="start_date" date_stop="end_date">
+            </gantt>
+            
+        </field>
+        
+        
+    </record>
   
+    <record model="ir.actions.act_window" id="session_list_action">
+        <field name="name">Sessions</field>
+        <field name="res_model">openacademy.session</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form,calendar,graph,kanban,gantt</field>
+        <field name="help" type="html">
+            <p class="oe_view_nocontent_create">Create your firts Session</p>
+        </field>
+    </record>
+
     <record model="ir.actions.act_window" id="course_list_action">
         <field name="name">Courses</field>
         <field name="res_model">openacademy.course</field>
         <field name="view_mode">tree,form</field>
+        <!-- To make a filter a default on its with search_default_your filter name-->
+        <field name="context" eval="{'search_default_my_courses': 1}"/>
         <field name="help" type="html">
             <p class="oe_view_nocontent_create">Create your firts course</p>
-        </field>
-    </record>
-    
-    <record model="ir.actions.act_window" id="session_list_action">
-        <field name="name">Sessions</field>
-        <field name="res_model">openacademy.session</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="oe_view_nocontent_create">Create your firts Session</p>
         </field>
     </record>
 
@@ -123,5 +216,34 @@
     <!-- Menu Level 2 -->  
     <menuitem name="Courses" id="openacademy_menu_2" parent="openacademy_menu_1" action="course_list_action"/>
     <menuitem name="Sessions" id="openacademy_menu_3" parent="openacademy_menu_1" action="session_list_action"/>
+
+
+    <record model="ir.ui.view" id="wizard_form_view">
+        <field name="name">wizard.form</field>
+        <field name="model">openacademy.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Add Attendees">
+                <group>
+                    <field name="session_ids" widget="many2many_tags"/>
+                    <field name="attendee_ids"/>
+                </group>
+                <footer>
+                    <button name="subscribe" type="object"
+                            string="Subscribe" class="oe_highlight"/>
+                    or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <act_window id="launch_session_wizard"
+                name="Add Attendees"
+                src_model="openacademy.session"
+                res_model="openacademy.wizard"
+                view_mode="form"
+                target="new"
+                key2="client_action_multi"/>
+
 
 </odoo>

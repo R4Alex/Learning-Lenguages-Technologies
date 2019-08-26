@@ -10,7 +10,7 @@
         Long description of module's purpose
     """,
 
-    'author': "Modoole Tech",
+    'author': "Alejandro Santillan Modoole Tech",
     'website': "https://modoole.com",
 
 
@@ -21,14 +21,18 @@
     
     # any module necessary for this one to work correctly
     'depends': [
-        'base'
+        'base',
+        'board',
     ],
 
     # always loaded
     'data': [
+        'security/security.xml',
         'security/ir.model.access.csv',
         'views/views.xml',
-        'views/templates.xml',
+        'views/partner.xml',
+        'views/session_board.xml',
+        'reports/reports.xml',
     ],
     
     # only loaded in demonstration mode
