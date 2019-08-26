@@ -6,17 +6,17 @@ def create_database():
 	connection = sqlite3.connect("restaurant.db")
 	cursor = connection.cursor()
 	try:
-		cursor.execute('''
+		cursor.execute("""
 			CREATE TABLE category(
 					id INTEGER PRIMARY KEY AUTOINCREMENT,
-					name VARCHAR(100) UNIQUE NOT NULL)''')
+					name VARCHAR(100) UNIQUE NOT NULL)""")
 
-		cursor.execute('''
+		cursor.execute("""
 			CREATE TABLE plate(
 				id INTEGER PRIMARY KEY AUTOINCREMENT,
 				name VARCHAR(100) UNIQUE NOT NULL, 
 				category_id INTEGER NOT NULL,
-				FOREIGN KEY(category_id) REFERENCES category(id))''')
+				FOREIGN KEY(category_id) REFERENCES category(id))""")
 
 		print("Tables Created")
 		connection.commit()
@@ -87,16 +87,18 @@ def show_menu():
 
 print("Welcome to your restaurant!")
 
+create_database()
+
 message = "Menu:\n1. Add a Category\n2. Add a Plate\n3. Show Menu\n4. Exit\n"
 
-#while True:
-option = input(message)
+while True:
+	option = input(message)
 
-if option == '1':
-	add_category()
-elif option == '2':
-	add_plate()
-elif option == '3':
-	show_menu()
-else:
-	exit()
+	if option == '1':
+		add_category()
+	elif option == '2':
+		add_plate()
+	elif option == '3':
+		show_menu()
+	else:
+		exit()

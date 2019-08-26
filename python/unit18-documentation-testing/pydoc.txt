@@ -1,0 +1,24 @@
+# on terminal
+pydoc mi_module
+	prints mi_module help on terminal output
+
+
+pydoc -w mi_module:
+	write mi_module help on a mi_module.html
+
+
+pydoc -w mi_package:
+	create package documentation but just one level
+
+
+pydoc -w mi_package .\:
+	create package documentation on recursive mode
+
+
+pydoc -b:
+	Show all python packages installed on html on a random port
+
+pydoc -p 8000:
+	This allows you to work with an specific port
+
+There is others python documentation modules epydoc or sphinx but these ones are third parties modules
